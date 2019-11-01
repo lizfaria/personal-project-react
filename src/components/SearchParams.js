@@ -1,9 +1,9 @@
 import React from 'react';
 
-const SearchParams = ({showSearch, requestUser, handleSubmit, userValue}) => {
+const SearchParams = ({requestUser, handleSubmit, userValue}) => {
     return (
         <form 
-            className={showSearch !== true ? "hidden" : ""}
+            // className={showSearch !== true ? "hidden" : ""}
             onSubmit={e => {
                 e.preventDefault();
                 if (userValue !== "") { requestUser()};

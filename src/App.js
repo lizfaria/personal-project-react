@@ -7,9 +7,9 @@ const App = () => {
 	const [userValue, setUserValue] = useState("");
 	const [recentRepos, setRecentRepos] = useState(null);
 
-	const handleSubmit = e => setUserValue(e.target.value);
+	const handleChange = e => setUserValue(e.target.value);
 
-	const requestUser = async () => {
+	const handleSubmit = async (userValue) => {
 		const API_URL = "https://api.github.com/users"
 		new Promise((resolve, reject) => {
 			fetch(`${API_URL}/${userValue}/events`)
@@ -23,8 +23,8 @@ const App = () => {
     <div className="App">
 		{recentRepos === null || recentRepos === [] ? 
 			<SearchParams 
-			requestUser={requestUser} 
 			handleSubmit={handleSubmit} 
+			handleChange={handleChange} 
 			userValue={userValue}
 			/>
 		: null}

@@ -3,6 +3,7 @@ import Forks from "./Forks.js"
 import PullRequests from "./PullRequests.js"
 
  const Results = ({recentRepos, userValue}) => {
+     console.log(recentRepos)
     return (
         <div>
             <h1>{userValue}</h1>

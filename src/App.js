@@ -1,13 +1,12 @@
 import React, {useEffect} from 'react';
 import './App.css';
 import { connect } from "react-redux";
-import {getUserGithubData, setUserValue} from "./store/actions.js";
-
+import {getUserGithubData, setUserValue, setShowSearch} from "./store/actions.js";
 import SearchParams from "./components/SearchParams.js";
 import Results from "./components/Results.js"
 
 
-const App = ({getUserGithubData, setUserValue, userValue, recentRepos, searchError, showSearch}) => {
+const App = ({getUserGithubData, setUserValue, userValue, recentRepos, searchError, setShowSearch, showSearch}) => {
 	useEffect(() =>{
 	},[showSearch, recentRepos])
 	const handleChange = e => {
@@ -19,6 +18,10 @@ const App = ({getUserGithubData, setUserValue, userValue, recentRepos, searchErr
 		e.preventDefault();
 		getUserGithubData(userValue)
 	}
+	const handleReturn = (e) => {
+		e.preventDefault();
+		setShowSearch(true)
+	}
 
   return (
     <div className="App">
@@ -28,7 +31,10 @@ const App = ({getUserGithubData, setUserValue, userValue, recentRepos, searchErr
 			handleChange={handleChange} 
 			/>
 		: recentRepos ? 
-				<Results recentRepos={recentRepos} userValue={userValue} /> 	
+			<>
+				<Results recentRepos={recentRepos} userValue={userValue} /> 
+				<button onClick={handleReturn}>Back</button>	
+			</>
 		: <p>...Loading</p>	
 		}
 		{searchError ? <p>Username Not Found. Try Again</p> : null }
@@ -45,6 +51,7 @@ const mapStateToProps = state => ({
 const mapDispatchToProps = dispatch => ({
 	getUserGithubData: user => dispatch(getUserGithubData(user)),
 	setUserValue: user => dispatch(setUserValue(user)),
+	setShowSearch: bool => dispatch(setShowSearch(bool))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(App);

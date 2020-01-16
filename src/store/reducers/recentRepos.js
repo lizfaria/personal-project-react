@@ -1,13 +1,19 @@
-// create inital state
-const initalState = {
+// create initial state
+const initialState = {
     recentRepos: null
   };
 
-
-export default function recentRepos(state = initalState, action) {
-    if (action.type = "SET_REPOS") {
-        return action.payload;
-    } else {
-        return state;
+const recentRepos = (state = initialState, action) => {
+    switch (action.type) {
+        case "SET_REPOS": 
+        return {
+            ...state,
+            recentRepos: action.payload
+        } 
+        default: 
+            return state;
     }
 }
+
+export default recentRepos;
+

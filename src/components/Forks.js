@@ -1,7 +1,6 @@
 import React from 'react';
 
 const Forks = ({recentRepos}) => {
-    
     const recentRepoForks = recentRepos.filter(recentRepo => recentRepo.type === "ForkEvent")
   
     if (recentRepoForks.length > 0) {
@@ -26,4 +25,5 @@ const Forks = ({recentRepos}) => {
         )
     }
 }
+
 export default Forks;

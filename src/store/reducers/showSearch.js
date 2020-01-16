@@ -1,12 +1,20 @@
 // create inital state
-const initalState = {
+const initialState = {
     showSearch: true
   };
 
-export default function showSearch(state = initalState, action) {
-    if (action.type = "SET_SHOW_SEARCH") {
-        return action.payload;
-    } else {
-        return state;
+const showSearch = (state = initialState, action) => {
+    switch (action.type) {
+        case "SET_SHOW_SEARCH":
+            return {
+                ...state,
+                showSearch: action.payload
+            } 
+        default: 
+            return state;
     }
 }
+
+export default showSearch
+
+

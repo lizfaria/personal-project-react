@@ -1,22 +1,14 @@
 import React from 'react';
 
-const SearchParams = ({handleSubmit, handleChange, userValue}) => {
+const SearchParams = ({handleSubmit, handleChange}) => {
     return (
-        <form 
-            // className={showSearch !== true ? "hidden" : ""}
-            onSubmit={e => {
-                e.preventDefault();
-                // if (userValue !== "") { 
-                    return handleSubmit(userValue)
-                // };
-            }}>
+        <form onSubmit={handleSubmit}>
             <label htmlFor="search_username">Github Username</label>
             <input 
                 id="search_username" 
                 type="text" 
                 name="username"
                 placeholder="GitHub Username" 
-                value={userValue} 
                 onChange={handleChange} />
             <button>Get User</button>
         </form>

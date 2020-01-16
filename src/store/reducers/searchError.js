@@ -1,12 +1,19 @@
-// create inital state
-const initalState = {
+// create initial state
+const initialState = {
     searchError: false
   };
 
-export default function searchError(state = initalState, action) {
-    if (action.type = "SET_SEARCH_ERROR") {
-        return action.payload;
-    } else {
-        return state;
+const searchError = (state = initialState, action) => {
+    switch(action.type) {
+        case "SET_SEARCH_ERROR":
+            return {
+                ...state,
+                searchError: action.payload
+            } 
+        default: 
+            return state;
     }
 }
+
+export default searchError;
+

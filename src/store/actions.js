@@ -16,11 +16,19 @@ export const setSearchError = (searchError = false) => ({
 });
 
 const API_URL = "https://api.github.com/users"
-export const requestUser = userValue => dispatch => {
-    return fetch(`${API_URL}/${userValue}/events`)
-        .then(res => res.json())
-        .then(res => res.message === "Not Found" ? dispatch(setSearchError(true)) : dispatch(setRecentRepos(res)))
-        .catch(err => dispatch(setSearchError(true)))
+export const getUserGithubData = userName => async dispatch => {
+    try {
+        const response = await fetch(`${API_URL}/${userName}/events`)
+        const data = await response.json();
+        if (response.ok) {
+            await dispatch(setSearchError(false));
+            await dispatch(setShowSearch(false));
+            await dispatch(setRecentRepos(data));
+        } else {
+            await dispatch(setSearchError(true));
+        }
+    }
+    catch(err) {
+        dispatch(setSearchError(true));
+    }
 }
-
-

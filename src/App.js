@@ -1,55 +1,50 @@
-import React, { useState, useEffect} from 'react';
+import React, {useEffect} from 'react';
 import './App.css';
+import { connect } from "react-redux";
+import {getUserGithubData, setUserValue} from "./store/actions.js";
+
 import SearchParams from "./components/SearchParams.js";
 import Results from "./components/Results.js"
 
-const App = () => {
-	const [userValue, setUserValue] = useState("");
-	const [recentRepos, setRecentRepos] = useState(null);
-	const [usernameError, setUsernameError] = useState(false);
-	const handleChange = e => setUserValue(e.target.value);
-	
-	useEffect(() => {
-	},[setUsernameError, recentRepos])
 
-	const handleSubmit = (userValue) => {
-		const API_URL = "https://api.github.com/users"
-		const getGithubData = async(res, err) => {
-			try {
-				const response = await fetch(`${API_URL}/${userValue}/events`)
-				const data = await response.json();
-				if (response.ok) {
-					setUsernameError(false)
-					setRecentRepos(data)
-				} else {
-					setUsernameError(true)
-				}
-			}
-			catch(err) {
-				console.log(err)
-			}
-		}
-		getGithubData()
+const App = ({getUserGithubData, setUserValue, userValue, recentRepos, searchError, showSearch}) => {
+	useEffect(() =>{
+	},[showSearch, recentRepos])
+	const handleChange = e => {
+		e.preventDefault();
+		e.stopPropagation();
+		setUserValue(e.target.value);
+	}
+	const handleSubmit = (e) => {
+		e.preventDefault();
+		getUserGithubData(userValue)
 	}
 
   return (
     <div className="App">
-		{recentRepos === null || recentRepos === [] ? 
+		{showSearch ? 
 			<SearchParams 
 			handleSubmit={handleSubmit} 
 			handleChange={handleChange} 
-			userValue={userValue}
 			/>
-		: null}
-		{ recentRepos !== null ? 
-			<Results recentRepos={recentRepos} userValue={userValue} /> :			
-			null
+		: recentRepos ? 
+				<Results recentRepos={recentRepos} userValue={userValue} /> 	
+		: <p>...Loading</p>	
 		}
-		{usernameError ? 
-			<p>Username Not Found. Try Again</p>
-		: null }
+		{searchError ? <p>Username Not Found. Try Again</p> : null }
     </div>
   )
 }
 
-export default App;
+const mapStateToProps = state => ({
+	recentRepos: state.recentRepos.recentRepos,
+	userValue: state.userValue.userValue,
+	searchError: state.searchError.searchError,
+	showSearch: state.showSearch.showSearch
+});
+const mapDispatchToProps = dispatch => ({
+	getUserGithubData: user => dispatch(getUserGithubData(user)),
+	setUserValue: user => dispatch(setUserValue(user)),
+});
+
+export default connect(mapStateToProps, mapDispatchToProps)(App);

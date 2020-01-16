@@ -1,13 +1,15 @@
-// create inital state
-const initalState = {
+// create initial state
+const initialState = {
     userValue: ""
   };
-
-export default function userValue(state = initalState, action) {
-    if (action.type = "SET_USER") {
-        return action.payload;
-    } else {
-        return state;
+export default function userValue(state = initialState, action) {
+    switch (action.type) {
+        case "SET_USER":
+            return {
+                ...state,
+                userValue: action.payload
+            } 
+        default:
+            return state;
     }
 }
-

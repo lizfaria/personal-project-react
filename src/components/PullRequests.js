@@ -1,13 +1,14 @@
 import React from 'react';
-import styled from 'styled-components'
 
  const PullRequest = ({recentRepos, List}) => {
-   
+    // filter for pull request events
     const recentRepoPullRequests = recentRepos.filter(recentRepo => recentRepo.type === "PullRequestEvent");
-     if (recentRepoPullRequests.length > 0) {
+    
+    if (recentRepoPullRequests.length > 0) {
         return (
             <List>
                 {recentRepoPullRequests.map(recentRepo => {
+                    //  for each item in PR array, destructor for title, url, state and id of pr event 
                     const {title, url, state} = recentRepo.payload.pull_request;
                     const key = recentRepo.id;
                     return(

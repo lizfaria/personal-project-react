@@ -1,10 +1,11 @@
-# Test-Driven React-Redux Personal Project
+# Test-Driven Micro React-Redux Personal Project
 
 ## Wireframes
 https://bridgeschool.invisionapp.com/public/share/5GWTMSJMH
 
 
 ## App Description
+
 A search form with an input that allows the user to enter a GitHub username and click the submit button to fetch the user information from Github Events API. 
 
 - On change of input, a redux action is triggered to store the new username state, a/nd on submit, an dispatch is triggered to call the redux thunk for the inputted GitHub username

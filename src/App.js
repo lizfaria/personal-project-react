@@ -1,14 +1,11 @@
-import React, {useEffect} from 'react';
+import React from 'react';
 import './App.css';
 import { connect } from "react-redux";
 import {getUserGithubData, setUserValue, setShowSearch} from "./store/actions.js";
 import SearchParams from "./components/SearchParams.js";
 import Results from "./components/Results.js"
 
-
 const App = ({getUserGithubData, setUserValue, userValue, recentRepos, searchError, setShowSearch, showSearch}) => {
-	useEffect(() =>{
-	},[showSearch, recentRepos])
 	const handleChange = e => {
 		e.preventDefault();
 		e.stopPropagation();
@@ -22,24 +19,23 @@ const App = ({getUserGithubData, setUserValue, userValue, recentRepos, searchErr
 		e.preventDefault();
 		setShowSearch(true)
 	}
-
-  return (
-    <div className="App">
-		{showSearch ? 
-			<SearchParams 
-			handleSubmit={handleSubmit} 
-			handleChange={handleChange} 
-			/>
-		: recentRepos ? 
-			<>
-				<Results recentRepos={recentRepos} userValue={userValue} /> 
-				<button onClick={handleReturn}>Back</button>	
-			</>
-		: <p>...Loading</p>	
-		}
-		{searchError ? <p>Username Not Found. Try Again</p> : null }
-    </div>
-  )
+  	return (
+		<div className="App">
+			{showSearch ? 
+				<SearchParams 
+				handleSubmit={handleSubmit} 
+				handleChange={handleChange} 
+				/>
+			: recentRepos ? 
+				<>
+					<Results recentRepos={recentRepos} userValue={userValue} /> 
+					<button onClick={handleReturn}>Back</button>	
+				</>
+			: <p>...Loading</p>	
+			}
+			{searchError ? <p>Username Not Found. Try Again</p> : null }
+		</div>
+  	)
 }
 
 const mapStateToProps = state => ({

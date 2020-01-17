@@ -8,7 +8,7 @@ const SearchParams = ({handleSubmit, handleChange}) => {
                 id="search_username" 
                 type="text" 
                 name="username"
-                placeholder="GitHub Username" 
+                placeholder="Type Something..." 
                 onChange={handleChange} />
             <button>Get User</button>
         </form>

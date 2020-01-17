@@ -1,11 +1,13 @@
 import React from 'react';
 import './App.css';
+import styled from 'styled-components'
 import { connect } from "react-redux";
-import {getUserGithubData, setUserValue, setShowSearch} from "./store/actions.js";
+import { getUserGithubData, setUserValue, setShowSearch } from "./store/actions.js";
 import SearchParams from "./components/SearchParams.js";
 import Results from "./components/Results.js"
 
 const App = ({getUserGithubData, setUserValue, userValue, recentRepos, searchError, setShowSearch, showSearch}) => {
+	
 	const handleChange = e => {
 		e.preventDefault();
 		e.stopPropagation();
@@ -19,6 +21,7 @@ const App = ({getUserGithubData, setUserValue, userValue, recentRepos, searchErr
 		e.preventDefault();
 		setShowSearch(true)
 	}
+
   	return (
 		<div className="App">
 			{showSearch ? 
@@ -29,11 +32,11 @@ const App = ({getUserGithubData, setUserValue, userValue, recentRepos, searchErr
 			: recentRepos ? 
 				<>
 					<Results recentRepos={recentRepos} userValue={userValue} /> 
-					<button onClick={handleReturn}>Back</button>	
-				</>
+					<button onClick={handleReturn}>Back</button>
+				</>	
 			: <p>...Loading</p>	
 			}
-			{searchError ? <p>Username Not Found. Try Again</p> : null }
+			{searchError ? <p className="error">Username Not Found. Try Again</p> : null }
 		</div>
   	)
 }

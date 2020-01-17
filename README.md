@@ -1,8 +1,4 @@
-# Test-Driven Micro React-Redux Personal Project
-
-## Wireframes
-https://bridgeschool.invisionapp.com/public/share/5GWTMSJMH
-
+# Micro Test-Driven React-Redux Personal Project
 
 ## App Description
 
@@ -29,4 +25,6 @@ A search form with an input that allows the user to enter a GitHub username and 
 - The user can click the back button to go back to the form to search for another github user 
 
 - This is a Test Driven Development (TDD) App. There are tests for all of the components, reducers, and helper functions.
+
+- Styled with CSS and styled components 
 

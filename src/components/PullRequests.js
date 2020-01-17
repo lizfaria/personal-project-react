@@ -1,12 +1,12 @@
 import React from 'react';
+import styled from 'styled-components'
 
- const PullRequest = ({recentRepos}) => {
-     
+ const PullRequest = ({recentRepos, List}) => {
+   
     const recentRepoPullRequests = recentRepos.filter(recentRepo => recentRepo.type === "PullRequestEvent");
-     
      if (recentRepoPullRequests.length > 0) {
         return (
-            <ul>
+            <List>
                 {recentRepoPullRequests.map(recentRepo => {
                     const {title, url, state} = recentRepo.payload.pull_request;
                     const key = recentRepo.id;
@@ -19,7 +19,7 @@ import React from 'react';
                         </li>
                     )
                 })}
-            </ul>   
+            </List>   
         ) 
     } else {
         return (

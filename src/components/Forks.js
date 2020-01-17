@@ -1,11 +1,11 @@
 import React from 'react';
 
-const Forks = ({recentRepos}) => {
+const Forks = ({recentRepos, List}) => {
     const recentRepoForks = recentRepos.filter(recentRepo => recentRepo.type === "ForkEvent")
   
     if (recentRepoForks.length > 0) {
         return (
-            <ul>
+            <List>
                 {recentRepoForks.map(recentRepo => {
                     const {full_name, html_url } = recentRepo.payload.forkee;
                     const {repo_name} = recentRepo.repo;
@@ -17,7 +17,7 @@ const Forks = ({recentRepos}) => {
                         </li>
                     )
                 })}
-            </ul>
+            </List>
         )
     } else {
         return (
